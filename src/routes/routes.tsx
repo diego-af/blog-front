@@ -1,5 +1,6 @@
 import App from '@/App';
 import {CreatePost} from '@/pages/CreatePost';
+import DetailsPost from '@/pages/DetailsPost';
 
 import {Home} from '@/pages/Home/Home';
 import Login from '@/pages/Login';
@@ -24,6 +25,11 @@ const routes: RouteObject[] = [
 			{
 				path: '/create-post',
 				element: <CreatePost />,
+				errorElement: <div>404</div>
+			},
+			{
+				path: '/post/:id',
+				element: <DetailsPost />,
 				errorElement: <div>404</div>
 			}
 		]

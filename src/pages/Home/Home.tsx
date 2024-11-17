@@ -20,7 +20,7 @@ export const Home = () => {
 		return <div>Erro</div>;
 	}
 	return (
-		<div className='w-full h-full flex flex-col p-4 xl:px-20'>
+		<div className='w-full  h-full flex flex-col p-4 justify-center items-center'>
 			<Post />
 		</div>
 	);

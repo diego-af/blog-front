@@ -19,7 +19,10 @@ export const PostItem = ({data}: {data: IPost}) => {
 					<span className='text-sm text-zinc-400'>{data.description}</span>
 				</div>
 
-				<Link to='/home' className='text-md text-red-500 hover:underline'>
+				<Link
+					to={`/post/${data.id}`}
+					className='text-md text-red-500 hover:underline'
+				>
 					Ler artigo
 				</Link>
 			</CardContent>

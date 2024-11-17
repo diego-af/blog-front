@@ -15,33 +15,6 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 // Menu items.
-const items = [
-	{
-		title: 'Home',
-		url: '/home',
-		icon: Home
-	},
-	{
-		title: 'Criar Post',
-		url: '/create-post',
-		icon: PencilIcon
-	},
-	{
-		title: 'Calendar',
-		url: '#',
-		icon: Calendar
-	},
-	{
-		title: 'Search',
-		url: '#',
-		icon: Search
-	},
-	{
-		title: 'Settings',
-		url: '#',
-		icon: Settings
-	}
-];
 
 export function SidebarPage() {
 	const [actve, setActive] = useState('Home');
