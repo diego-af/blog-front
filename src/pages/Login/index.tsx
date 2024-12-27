@@ -12,13 +12,14 @@ import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {useAuth} from '@/store/useAuth';
+import {useState} from 'react';
 
 const formSchema = z.object({
 	email: z.string().email({message: 'Email inválido'}).min(3, {
 		message: 'Email deve conter mais de 3 caracteres'
 	}),
-	password: z.string().min(5, {
-		message: 'Senha deve conter mais de 5 caracteres'
+	password: z.string().min(6, {
+		message: 'Senha deve conter mais de 6 caracteres'
 	})
 });
 
@@ -34,7 +35,12 @@ export default function Login() {
 	const {login} = useAuth();
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		login({email: values.email, password: values.password});
+		try {
+			login({email: values.email, password: values.password});
+		} catch (error: any) {
+			console.log(error);
+			alert('aqui');
+		}
 	}
 	return (
 		<div className='w-full h-screen grid grid-cols-1 md:grid-cols-2 bg-black'>

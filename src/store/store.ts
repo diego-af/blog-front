@@ -13,13 +13,16 @@ interface AuthState {
 	isAuthenticated: boolean;
 	logout: () => void;
 	setUser: (user: User) => void;
+	setError: (error: boolean) => void;
+	error: boolean;
 }
 const useAuthStore = create<AuthState>((set) => ({
 	user: null,
 	token: null,
 	setUser: (user: User) => set({user: user}),
 	isAuthenticated: false,
-
+	error: false,
+	setError: (error: boolean) => set({error: error}),
 	logout: () => {
 		set({
 			user: null,

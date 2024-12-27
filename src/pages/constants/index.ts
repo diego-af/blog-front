@@ -7,7 +7,7 @@ export const items = [
 		icon: Home
 	},
 	{
-		title: 'Criar Post',
+		title: 'Criar Artigo',
 		url: '/create-post',
 		icon: PencilIcon
 	}

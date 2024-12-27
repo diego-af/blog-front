@@ -1,8 +1,11 @@
-import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useMutation} from '@tanstack/react-query';
 import {useAuthStore} from './store';
 
 import {LoginApi} from '@/services/LoginAPi';
 import {useNavigate} from 'react-router-dom';
+import {toast} from 'sonner';
+import {useState} from 'react';
+
 export interface ApiError {
 	response?: {
 		data?: {
@@ -15,28 +18,28 @@ export interface ApiError {
 }
 export const useAuth = () => {
 	// const queryClient = useQueryClient();
+
 	const {user, setUser, token, isAuthenticated, logout} = useAuthStore();
 	const navigate = useNavigate();
 
 	const loginMutation = useMutation({
 		mutationFn: LoginApi,
 		onSuccess: (data: any) => {
-			// Atualiza o estado do Zustand com os dados do usuário
-
 			setUser({
-				name: data.data.name,
-				email: data.data.email,
-				token: data.data.token
+				name: data?.data.name,
+				email: data?.data.email,
+				token: data?.data.token
 			});
 			localStorage.setItem('token', data.data.token);
-			console.log(data.data);
 
 			// Invalida queries relevantes
 			// queryClient.invalidateQueries({queryKey: ['user']});
 			navigate('/home');
 		},
 		onError: (error: ApiError) => {
-			console.error('Erro no login:', error?.response?.data?.message);
+			console.error('Erro no login aq:', error);
+
+			toast.error(error?.response?.data?.message);
 			logout();
 		}
 	});
