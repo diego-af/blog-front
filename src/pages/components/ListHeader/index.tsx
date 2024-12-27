@@ -6,7 +6,7 @@ const ListHeader = () => {
 	const {itemSelected, setItemSelected} = useListHeaderViewModel();
 
 	return (
-		<div className=' flex gap-4 '>
+		<div className=' flex gap-4 space-x-0 '>
 			{items.map((item) => (
 				<Link
 					key={item.title}
