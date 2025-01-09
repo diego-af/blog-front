@@ -4,7 +4,7 @@ import {useAuthStore} from './store';
 import {LoginApi} from '@/services/LoginAPi';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'sonner';
-import {useState} from 'react';
+import {IUser} from '@/pages/types/Post';
 
 export interface ApiError {
 	response?: {
@@ -24,7 +24,7 @@ export const useAuth = () => {
 
 	const loginMutation = useMutation({
 		mutationFn: LoginApi,
-		onSuccess: (data: any) => {
+		onSuccess: (data: IUser) => {
 			setUser({
 				name: data?.data.name,
 				email: data?.data.email,

@@ -1,5 +1,3 @@
-import {Calendar, Home, Search, Settings, PencilIcon} from 'lucide-react';
-
 import {
 	Sidebar,
 	SidebarContent,
@@ -11,6 +9,7 @@ import {
 	SidebarMenuItem,
 	SidebarTrigger
 } from '@/components/ui/sidebar';
+import {items} from '@/pages/constants';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
