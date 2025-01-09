@@ -2,15 +2,16 @@ import {apiClient} from '@/services/apiClient';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 
+import {IPost} from '../types/Post';
+
 const DetailsPost = () => {
 	const {id} = useParams();
-	const [data, setData] = useState([]);
+	const [data, setData] = useState<IPost>({} as IPost);
 
 	useEffect(() => {
 		const getPost = async () => {
 			const response = await apiClient.get(`/post/${id}`);
 
-			console.log(response.data);
 			setData(response.data.post);
 		};
 

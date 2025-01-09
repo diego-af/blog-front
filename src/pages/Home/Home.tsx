@@ -9,7 +9,7 @@ export const Home = () => {
 	const navigate = useNavigate();
 	const {data} = useDetails();
 
-	if (!token) {
+	if (!token || !data) {
 		navigate('/login');
 		return;
 	}

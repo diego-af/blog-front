@@ -11,3 +11,13 @@ export interface IPost {
 export interface PostsInterface {
 	data: IPost[];
 }
+
+export interface IUser {
+	data: {
+		id: number;
+		name: string;
+		email: string;
+		role: string;
+		token: string;
+	};
+}

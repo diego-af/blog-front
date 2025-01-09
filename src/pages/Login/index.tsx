@@ -12,7 +12,6 @@ import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {useAuth} from '@/store/useAuth';
-import {useState} from 'react';
 
 const formSchema = z.object({
 	email: z.string().email({message: 'Email inválido'}).min(3, {
@@ -35,12 +34,7 @@ export default function Login() {
 	const {login} = useAuth();
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		try {
-			login({email: values.email, password: values.password});
-		} catch (error: any) {
-			console.log(error);
-			alert('aqui');
-		}
+		login({email: values.email, password: values.password});
 	}
 	return (
 		<div className='w-full h-screen grid grid-cols-1 md:grid-cols-2 bg-black'>
