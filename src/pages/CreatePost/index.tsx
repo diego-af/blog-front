@@ -19,18 +19,9 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {Textarea} from '@/components/ui/textarea';
+import {formSchema} from "@/pages/CreatePost/schema.ts";
 
-const formSchema = z.object({
-	title: z.string().min(3, {
-		message: 'Digite um título mais completo'
-	}),
-	description: z.string().min(5, {
-		message: 'Digite uma descrição mais completa'
-	}),
-	imageUrl: z.string().min(1, {
-		message: 'Senha deve conter mais de 5 caracteres'
-	})
-});
+
 export const CreatePost = () => {
 	const [content, setCOntent] = useState(DEFAULT);
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -42,8 +33,7 @@ export const CreatePost = () => {
 		}
 	});
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values);
+	function onSubmit() {
 		sendPOst();
 	}
 	const sendPOst = async () => {
@@ -51,7 +41,10 @@ export const CreatePost = () => {
 			alert('Prencha o campo');
 			return;
 		}
-		const response = await axios.post('http://localhost:3000/post-create', {
+
+		try{
+
+	 	await axios.post('http://localhost:3000/post-create', {
 			content: content,
 			title: form.getValues('title'),
 			description: form.getValues('description'),
@@ -59,7 +52,16 @@ export const CreatePost = () => {
 			authorId: 1
 		});
 
-		console.log(response);
+		form.reset()
+
+		}catch(error: unknown){
+				console.log(error);
+		}finally {
+			console.log(content);
+			setCOntent(DEFAULT);
+		}
+
+
 	};
 
 	return (

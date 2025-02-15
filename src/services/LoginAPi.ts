@@ -16,5 +16,20 @@ const LoginApi = async (credentials: {email: string; password: string}) => {
 		console.log(error?.response?.data?.message, 'api.ts');
 	}
 };
+const RegisterApi = async (credentials: {email: string; password: string, name: string}) => {
+	try {
+		const resposnse = apiClient.post('/user', credentials);
 
-export {LoginApi};
+		return (await resposnse).data;
+	} catch (error: any) {
+		toast.error(error?.response?.data?.message, {
+			duration: 5000,
+			className: 'bg-red-500',
+			position: 'top-center'
+		});
+
+		console.log(error?.response?.data?.message, 'api.ts');
+	}
+};
+
+export {LoginApi, RegisterApi};

@@ -1,10 +1,9 @@
 import {useMutation} from '@tanstack/react-query';
 import {useAuthStore} from './store';
 
-import {LoginApi} from '@/services/LoginAPi';
+import {LoginApi, RegisterApi} from '@/services/LoginAPi';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'sonner';
-import {useState} from 'react';
 
 export interface ApiError {
 	response?: {
@@ -43,6 +42,18 @@ export const useAuth = () => {
 			logout();
 		}
 	});
+	const registerMutation = useMutation({
+		mutationFn: RegisterApi,
+		onSuccess: () => {
+			navigate('/login');
+		},
+		onError: (error: ApiError) => {
+			console.error('Erro no login aq:', error);
+
+			toast.error(error?.response?.data?.message);
+			logout();
+		}
+	});
 
 	return {
 		user,
@@ -50,6 +61,8 @@ export const useAuth = () => {
 		isAuthenticated,
 		login: loginMutation.mutate,
 		logout,
+
+		register: registerMutation.mutate,
 		isLoading: loginMutation.isPending,
 		error: loginMutation.error
 	};

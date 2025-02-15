@@ -6,6 +6,7 @@ import {Home} from '@/pages/Home/Home';
 import Login from '@/pages/Login';
 
 import {createBrowserRouter, Navigate, RouteObject} from 'react-router-dom';
+import Register from "@/pages/Register";
 
 const routes: RouteObject[] = [
 	{
@@ -37,6 +38,10 @@ const routes: RouteObject[] = [
 	{
 		path: '/login',
 		element: <Login />
+	},
+	{
+		path: '/register',
+		element: <Register />
 	}
 ];
 

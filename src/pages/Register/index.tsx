@@ -12,7 +12,7 @@ import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 import {useAuth} from '@/store/useAuth';
-import {formSchema} from "@/pages/Login/schema.ts";
+import {formSchema} from "@/pages/Register/schema.ts";
 import {Link} from "react-router-dom";
 
 
@@ -22,15 +22,16 @@ export default function Login() {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			email: '',
-			password: ''
+			password: '',
+			name:""
 		}
 	});
 
-	const {login} = useAuth();
+	const {register} = useAuth();
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			login({email: values.email, password: values.password});
+			register({email: values.email, password: values.password, name: values.name});
 		} catch (error: any) {
 			console.log(error);
 			alert('aqui');
@@ -87,14 +88,33 @@ export default function Login() {
 									</FormItem>
 								)}
 							/>
+							<FormField
+								control={form.control}
+								name='name'
+								render={({field}) => (
+									<FormItem>
+										<FormLabel>Digite seu nome</FormLabel>
+										<FormControl>
+											<Input
+												placeholder='Digite seu nome'
+												{...field}
+												className='w-full rounded-md border-zinc-600 ring-0 outline-none focus-ring-0 focus:ring-offset-0 focus-outline-none focus-border-none'
+
+											/>
+										</FormControl>
+
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
 							<Button type='submit' className='w-full'>
 								Acessar
 							</Button>
 						</form>
 					</Form>
 					<div className={'text-center'}>
-						<span className={"text-sm text-text-zinc-500"}>Não tem conta? </span>
-						<Link className={"text-md richtext-underline text-text-black-900"} to={"/register"}>Crie agora</Link>
+						<span className={"text-sm text-text-zinc-500"}>Já tem conta? </span>
+						<Link className={"text-md richtext-underline text-text-black-900"} to={"/login"}>Login</Link>
 					</div>
 				</div>
 			</div>
